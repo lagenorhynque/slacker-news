@@ -1,0 +1,31 @@
+{
+	"ImportPath": "github.com/lagenorhynque/slacker-news",
+	"GoVersion": "go1.7",
+	"GodepVersion": "v74",
+	"Deps": [
+		{
+			"ImportPath": "github.com/munrocape/bbc/bbcclient",
+			"Rev": "2c37e623edc8d5ee2930bafae594befd9934dd4e"
+		},
+		{
+			"ImportPath": "github.com/munrocape/dn/dnclient",
+			"Rev": "c53347acdb27ec8b0096e6f8d4a413062f65d1b6"
+		},
+		{
+			"ImportPath": "github.com/munrocape/fivethirtyeight/fivethirtyeightclient",
+			"Rev": "c4bf8a0e4458604c26a139b7b39666aa0db5cb81"
+		},
+		{
+			"ImportPath": "github.com/munrocape/hn/hnclient",
+			"Rev": "8a8a24c2c8db40d10d5b1c6236d3d394f7ae51bc"
+		},
+		{
+			"ImportPath": "github.com/munrocape/ph/phclient",
+			"Rev": "3301fed7e80391b067cec6beee18681a0bbb22c1"
+		},
+		{
+			"ImportPath": "github.com/munrocape/vice/viceclient",
+			"Rev": "823c8663d3efebe2f934c260196022d9724f03fa"
+		}
+	]
+}
