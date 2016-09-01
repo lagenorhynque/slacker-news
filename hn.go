@@ -2,9 +2,10 @@ package main
 
 import (
 	"fmt"
-	hn "github.com/munrocape/hn/hnclient"
 	"strings"
 	"time"
+
+	hn "github.com/munrocape/hn/hnclient"
 )
 
 var (
@@ -13,7 +14,7 @@ var (
 	currentHnTimestamp time.Time
 )
 
-func getHnTop10() (string, error) {
+func GetHnTop10() (string, error) {
 	var err error
 	if ExpiredResponse(currentHnTimestamp) {
 		currentHnResponse, err = generateNewHnResponse()

@@ -2,9 +2,10 @@ package main
 
 import (
 	"fmt"
-	vice "github.com/munrocape/vice/viceclient"
 	"strings"
 	"time"
+
+	vice "github.com/munrocape/vice/viceclient"
 )
 
 var (

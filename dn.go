@@ -2,23 +2,24 @@ package main
 
 import (
 	"fmt"
-	dn "github.com/munrocape/dn/dnclient"
 	"strings"
 	"time"
+
+	dn "github.com/munrocape/dn/dnclient"
 )
 
 var (
-	DnClient           *dn.Client
-	currentDnStories  string
-	currentDnMotd string
+	DnClient                  *dn.Client
+	currentDnStories          string
+	currentDnMotd             string
 	currentDnStoriesTimestamp time.Time
-	currentDnMotdTimestamp time.Time
+	currentDnMotdTimestamp    time.Time
 )
 
-func GetDnArgument(argument string) (string, error){
-	if (argument == "motd"){
+func GetDnArgument(argument string) (string, error) {
+	if argument == "motd" {
 		return GetDnMotd()
-	} else if (argument == "news"){
+	} else if argument == "news" {
 		return GetDnTop10()
 	} else {
 		return "", fmt.Errorf("Invalid argument")
@@ -33,7 +34,7 @@ func GetDnTop10() (string, error) {
 	return currentDnStories, err
 }
 
-func GetDnMotd() (string, error){
+func GetDnMotd() (string, error) {
 	var err error
 	if ExpiredResponse(currentDnMotdTimestamp) {
 		currentDnMotd, err = generateNewDnMotd()
@@ -71,7 +72,7 @@ func generateNewDnResponse() (string, error) {
 	var urls [11]string
 	urls[0] = "Top Stories from <www.news.layervault.com|Designer News>"
 	for index, element := range stories[:count] {
-		if (index < 10){
+		if index < 10 {
 			index = index + 1
 			if err == nil {
 				urls[index] = fmt.Sprintf("%d. <%s|%s> - [<%s|%d comments>]", index, element.Url, element.Title, element.SiteUrl, element.CommentCount)

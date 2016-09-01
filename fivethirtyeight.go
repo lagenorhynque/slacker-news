@@ -2,9 +2,10 @@ package main
 
 import (
 	"fmt"
-	fte "github.com/munrocape/fivethirtyeight/fivethirtyeightclient"
 	"strings"
 	"time"
+
+	fte "github.com/munrocape/fivethirtyeight/fivethirtyeightclient"
 )
 
 var (
@@ -61,7 +62,7 @@ func GetFteSources() string {
 	c := getFteClient()
 	res := ""
 	first := true
-	for k, _ := range c.Categories {
+	for k := range c.Categories {
 		if first {
 			res = res + k
 			first = false
@@ -85,13 +86,13 @@ func getFteClient() *fte.Client {
 }
 
 func initializeFteTimestampMap(c *fte.Client) {
-	for k, _ := range c.Categories {
+	for k := range c.Categories {
 		fteTimestamps[k] = time.Now().Local().AddDate(0, 0, -11)
 	}
 }
 
 func initializeFteResponseMap(c *fte.Client) {
-	for k, _ := range c.Categories {
+	for k := range c.Categories {
 		currentFteResponses[k] = ""
 	}
 }

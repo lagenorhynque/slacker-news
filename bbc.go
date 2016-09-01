@@ -2,9 +2,10 @@ package main
 
 import (
 	"fmt"
-	bbc "github.com/munrocape/bbc/bbcclient"
 	"strings"
 	"time"
+
+	bbc "github.com/munrocape/bbc/bbcclient"
 )
 
 var (
@@ -50,7 +51,7 @@ func GetBbcSources() string {
 	c := getBbcClient()
 	res := ""
 	first := true
-	for k, _ := range c.NewsCategories {
+	for k := range c.NewsCategories {
 		if first {
 			res = res + k
 			first = false
@@ -59,7 +60,7 @@ func GetBbcSources() string {
 		}
 
 	}
-	for k, _ := range c.SportsCategories {
+	for k := range c.SportsCategories {
 		res = res + ", " + k
 	}
 	return res

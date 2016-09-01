@@ -33,9 +33,9 @@ func index(w http.ResponseWriter, r *http.Request) {
 }
 
 func news(w http.ResponseWriter, r *http.Request) {
-	news_source := r.URL.Query().Get("text")
-	log.Println(news_source)
-	tokens := strings.Split(strings.ToLower(news_source), " ")
+	newsSource := r.URL.Query().Get("text")
+	log.Println(newsSource)
+	tokens := strings.Split(strings.ToLower(newsSource), " ")
 	var source, argument string
 	if len(tokens) == 2 {
 		source, argument = tokens[0], tokens[1]
@@ -44,7 +44,7 @@ func news(w http.ResponseWriter, r *http.Request) {
 	}
 	switch {
 	case source == "hn":
-		stories, err := getHnTop10()
+		stories, err := GetHnTop10()
 		if err == nil {
 			w.Write([]byte(stories))
 		} else {
@@ -98,11 +98,11 @@ func news(w http.ResponseWriter, r *http.Request) {
 		if err == nil {
 			w.Write([]byte(stories))
 		} else {
-			if strings.Contains(err.Error(), "Invalid argument"){
+			if strings.Contains(err.Error(), "Invalid argument") {
 				w.Write([]byte("Invalid argument - try `/news help` to view valid selections."))
 			} else {
 				w.Write([]byte("Server Error - Designer News could not be reached"))
-			}	
+			}
 		}
 		return
 	case source == "help":
@@ -112,8 +112,8 @@ func news(w http.ResponseWriter, r *http.Request) {
 		w.Write([]byte(GetSources()))
 		return
 	}
-	user_argument := fmt.Sprintf("%s %s", source, argument)
-	w.Write([]byte("Hmm.. I can't figure out what news you are looking for :( I received \"" + strings.TrimSpace(user_argument) + "\"\nTry `/news help` to view all sources."))
+	userArgument := fmt.Sprintf("%s %s", source, argument)
+	w.Write([]byte("Hmm.. I can't figure out what news you are looking for :( I received \"" + strings.TrimSpace(userArgument) + "\"\nTry `/news help` to view all sources."))
 }
 
 func GetSources() string {
