@@ -4,6 +4,10 @@
 	"GodepVersion": "v74",
 	"Deps": [
 		{
+			"ImportPath": "github.com/bluele/slack",
+			"Rev": "a04fc519c7bffed19b018e1200ad6f312e093af3"
+		},
+		{
 			"ImportPath": "github.com/munrocape/bbc/bbcclient",
 			"Rev": "2c37e623edc8d5ee2930bafae594befd9934dd4e"
 		},

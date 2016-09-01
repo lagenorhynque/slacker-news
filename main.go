@@ -5,12 +5,16 @@ import (
 	"fmt"
 	"log"
 	"net/http"
+	"os"
 	"strings"
 	"time"
+
+	"github.com/bluele/slack"
 )
 
 var (
 	timeToExpire time.Duration
+	webHook      *slack.WebHook
 )
 
 func main() {
@@ -20,6 +24,7 @@ func main() {
 
 	// declare variables
 	timeToExpire = 10 * time.Minute
+	webHook = slack.NewWebHook(os.Getenv("WEBHOOK_URL"))
 
 	// Start our Server
 	log.Println("Starting Server on", *port)
@@ -42,35 +47,38 @@ func news(w http.ResponseWriter, r *http.Request) {
 	} else {
 		source, argument = tokens[0], ""
 	}
-	switch {
-	case source == "hn":
+
+	userName := formatUserName(r)
+	channel := getChannel(r)
+	switch source {
+	case "hn":
 		stories, err := GetHnTop10()
 		if err == nil {
-			w.Write([]byte(stories))
+			postToSlack(userName+stories, channel)
 		} else {
 			w.Write([]byte("Server Error - Firebase could not be reached"))
 		}
 		return
-	case source == "ph":
+	case "ph":
 		posts, err := GetPhTop10()
 		if err == nil {
-			w.Write([]byte(posts))
+			postToSlack(userName+posts, channel)
 		} else {
 			w.Write([]byte("Server Error - Product Hunt could not be reached"))
 		}
 		return
-	case source == "vice":
+	case "vice":
 		articles, err := GetViceTop10()
 		if err == nil {
-			w.Write([]byte(articles))
+			postToSlack(userName+articles, channel)
 		} else {
 			w.Write([]byte("Server Error - Vice News could not be reached"))
 		}
 		return
-	case source == "bbc":
+	case "bbc":
 		articles, err := GetBbcTop10(argument)
 		if err == nil {
-			w.Write([]byte(articles))
+			postToSlack(userName+articles, channel)
 		} else {
 			if strings.Contains(err.Error(), "Invalid feed selection") {
 				response := fmt.Sprintf("That is an invalid BBC category: %s\nTry `/news help` to view all sources.", argument)
@@ -80,10 +88,10 @@ func news(w http.ResponseWriter, r *http.Request) {
 			}
 		}
 		return
-	case source == "538":
+	case "538":
 		articles, err := GetFteTop10(argument)
 		if err == nil {
-			w.Write([]byte(articles))
+			postToSlack(userName+articles, channel)
 		} else {
 			if strings.Contains(err.Error(), "Invalid feed selection") {
 				response := fmt.Sprintf("That is an invalid FiveThirtyEight category: %s\nTry `/news help` to view all sources.", argument)
@@ -93,10 +101,10 @@ func news(w http.ResponseWriter, r *http.Request) {
 			}
 		}
 		return
-	case source == "dn":
+	case "dn":
 		stories, err := GetDnArgument(argument)
 		if err == nil {
-			w.Write([]byte(stories))
+			postToSlack(userName+stories, channel)
 		} else {
 			if strings.Contains(err.Error(), "Invalid argument") {
 				w.Write([]byte("Invalid argument - try `/news help` to view valid selections."))
@@ -105,10 +113,10 @@ func news(w http.ResponseWriter, r *http.Request) {
 			}
 		}
 		return
-	case source == "help":
+	case "help":
 		w.Write([]byte(GetSources()))
 		return
-	case source == "":
+	case "":
 		w.Write([]byte(GetSources()))
 		return
 	}
@@ -132,4 +140,30 @@ func ExpiredResponse(timestamp time.Time) bool {
 		return true
 	}
 	return false
+}
+
+func formatUserName(r *http.Request) string {
+	return fmt.Sprintf("// %s\n", r.URL.Query().Get("user_name"))
+}
+
+func getChannel(r *http.Request) string {
+	channelName := r.URL.Query().Get("channel_name")
+	switch channelName {
+	case "directmessage":
+		return "@" + r.URL.Query().Get("user_name")
+	case "privategroup":
+		return r.URL.Query().Get("channel_id")
+	default:
+		return "#" + channelName
+	}
+}
+
+func postToSlack(text string, channel string) {
+	err := webHook.PostMessage(&slack.WebHookPostPayload{
+		Text:    text,
+		Channel: channel,
+	})
+	if err != nil {
+		panic(err)
+	}
 }
