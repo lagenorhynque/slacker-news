@@ -1,0 +1,15 @@
+{
+    "name": "Slacker News",
+    "description": "Read current stories from Hacker News, the BBC, and more right from within Slack.",
+    "keywords": [
+        "slack",
+        "golang",
+        "web",
+        "stack overflow"
+    ],
+    "env": {
+        "WEBHOOK_URL": {
+            "description": "The URL to post stuff to slack (an incoming web-hook)."
+        }
+    }
+}
