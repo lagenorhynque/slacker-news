@@ -1,0 +1,14 @@
+github.com/bluele/slack v0.0.0-20160812151105-a04fc519c7bf h1:cTTTomzTbCDlkoJ2F0RMaWGThwFVVZNrRsiKfVRkEFE=
+github.com/bluele/slack v0.0.0-20160812151105-a04fc519c7bf/go.mod h1:W679Ri2W93VLD8cVpEY/zLH1ow4zhJcCyjzrKxfM3QM=
+github.com/munrocape/bbc v0.0.0-20150321033015-2c37e623edc8 h1:KVfStHdLRokzn7qIXa0vr+SyLebKgF5qzmxr9gRR3mg=
+github.com/munrocape/bbc v0.0.0-20150321033015-2c37e623edc8/go.mod h1:jHwyOYPEHVuO0ijggQWjB/gp89cSiXCcnWZ7TibwGpo=
+github.com/munrocape/dn v0.0.0-20150327015657-c53347acdb27 h1:/YzR3KFpN38wMoJ9fJcaJkh+d7wgvS5yClEx5AEfqe0=
+github.com/munrocape/dn v0.0.0-20150327015657-c53347acdb27/go.mod h1:p7jLbdkyKsakTjaB+5N+PLbT7p/RahaTILeHBScC9Rw=
+github.com/munrocape/fivethirtyeight v0.0.0-20150321031835-c4bf8a0e4458 h1:+0eKOVnEu/lQEjZQ/TaoT3zP0OrQxLfzjCmnyIf5tW8=
+github.com/munrocape/fivethirtyeight v0.0.0-20150321031835-c4bf8a0e4458/go.mod h1:xRWkfNjSxos+PDmsi5f53VT5CueZ6gov8xPsHdqoxtU=
+github.com/munrocape/hn v0.0.0-20150319232634-8a8a24c2c8db h1:3/qtKpfgo4nf30lpbHU/ZU6IiFr8I5DPOdSBosYM0Gk=
+github.com/munrocape/hn v0.0.0-20150319232634-8a8a24c2c8db/go.mod h1:AkANiVk3x4Zx5lVDTkrU3QoZagMKOf3Yhz6ALcDxvr0=
+github.com/munrocape/ph v0.0.0-20150320220709-3301fed7e803 h1:yik+P/kyjHex/A1nmfBOXk+rCQtbJXek6QcKx2ALmpA=
+github.com/munrocape/ph v0.0.0-20150320220709-3301fed7e803/go.mod h1:E4x28NAfQ+ufJ7weNseVC6mf/VuUKpd9R/R5aTfgReE=
+github.com/munrocape/vice v0.0.0-20150321012541-823c8663d3ef h1:mdZYKDsttgxHNlO29aoelc4PdW1PIWRMyF0HGV3h120=
+github.com/munrocape/vice v0.0.0-20150321012541-823c8663d3ef/go.mod h1:CkVt9e3gAj6YHRdjtohVyY2om8i7CQEIRayPTnxG1hw=
